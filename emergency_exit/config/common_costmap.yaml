@@ -1,0 +1,10 @@
+# http://wiki.ros.org/costmap_2d
+# http://wiki.ros.org/costmap_2d/flat
+map_type: costmap
+resolution: 0.05
+inscribed_radius: 0.05
+circumscribed_radius: 0.0707
+footprint: [[-0.05, -0.05], [-0.05, 0.05], [0.05, 0.05],[0.05, -0.05]]
+observation_sources: base_scan
+base_scan: {data_type: LaserScan, topic: /base_scan, marking: true, clearing: true}
+

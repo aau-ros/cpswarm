@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="visual" default="false" />
+    <param name="use_sim_time"  value="true"/>
+    
+    <!-- emergency_exit: the emergency exit simulation -->
+    <node name="emergency_exit" pkg="emergency_exit" type="emergency_exit" output="screen" required="true">
+        <rosparam file="$(find emergency_exit)/config/emergency_exit.yaml"  command="load" />
+    </node>
+    
+    <!-- stage: the simulator -->
+    <node if="$(arg visual)" name="stage" pkg="stage_ros" type="stageros" args="$(find emergency_exit)/world/small_maze.world" required="true" />
+    <node unless="$(arg visual)" name="stage" pkg="stage_ros" type="stageros" args="-g $(find emergency_exit)/world/small_maze.world" required="true" />
+
+    <!-- map server: provides the map -->
+    <node pkg="map_server" type="map_server" name="map_server" args="$(find emergency_exit)/world/small_maze.yaml" required="true" />
+    
+    <!-- move base: moves the agent -->
+    <node pkg="move_base" type="move_base" name="move_base" required="true">
+        <rosparam file="$(find emergency_exit)/config/common_costmap.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find emergency_exit)/config/common_costmap.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find emergency_exit)/config/navigation.yaml"     command="load" />
+        <rosparam file="$(find emergency_exit)/config/local_costmap.yaml"  command="load" />
+        <rosparam file="$(find emergency_exit)/config/global_costmap.yaml" command="load" />
+    </node>
+
+    <!-- fake_localization: localizes the robot in the map -->
+    <node pkg="fake_localization" type="fake_localization" name="fake_localization" required="true" />
+</launch>
+
