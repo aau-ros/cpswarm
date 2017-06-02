@@ -1,14 +1,4 @@
 log_path: "/home/micha/Workspaces/ros_cps/src/cpswarm/emergency_exit/log/" # path for writing log files
 epsilon: 0.15 # allowed distance between two points to be still considered at the same location
-steps: 10 # maximum number of simuation steps
-exits: 2 # number of emergency exits
-exit_0: [-2, 1] # coordinates of emergency exit
-exit_1: [2, 1] # coordinates of emergency exit
 step_size: 1 # number of meters that the robot moves in each simulation step
-#escape_route: [4,2,2,4] # a possible escape route, directions given as described below
-
-# the agent can move in eight directions:
-# 3 2 1
-# 4   0
-# 5 6 7
 

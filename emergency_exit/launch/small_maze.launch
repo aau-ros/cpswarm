@@ -5,7 +5,9 @@
     
     <!-- emergency_exit: the emergency exit simulation -->
     <node name="emergency_exit" pkg="emergency_exit" type="emergency_exit" output="screen" required="true">
-        <rosparam file="$(find emergency_exit)/config/emergency_exit.yaml"  command="load" />
+        <rosparam file="$(find emergency_exit)/config/emergency_exit.yaml" command="load" />
+        <rosparam file="$(find emergency_exit)/config/frevo.yaml" command="load" />
+        <rosparam file="$(find emergency_exit)/world/small_maze.yaml" command="load" />
     </node>
     
     <!-- stage: the simulator -->
